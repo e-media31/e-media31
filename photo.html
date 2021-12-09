@@ -1,0 +1,35 @@
+<html>
+<body>
+<form name="myForm" action="" method="post">
+  <input id="fileForUpload" type="file" accept="image/*;" capture="camera">
+  <input type="button" value="Send" onclick="submitForm()">
+</form>
+File : content : <span id="fileContents"></span>
+
+
+<script>
+function submitForm(){
+ 
+  var file = document.getElementById("fileForUpload").files[0];
+  if (file) {
+    var reader = new FileReader();
+    reader.readAsText(file, "UTF-8");
+    reader.onload = function (evt) {
+        document.getElementById("fileContents").innerHTML = evt.target.result;
+    }
+    reader.onerror = function (evt) {
+        document.getElementById("fileContents").innerHTML = "error reading file";
+    }
+  }
+  
+  alert('submit form');
+  //document.myForm.submit();
+ 
+
+}
+
+</script>
+
+
+</body>
+</html>
