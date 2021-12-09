@@ -1,14 +1,110 @@
 <html>
+<head>
+<!-- FF 2021-12-09 -->
+<style>
+# https://waytolearnx.com/2019/07/changer-le-bouton-parcourir-dun-input-de-type-file-avec-css.html
+.parent-div {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+.parent-div input[type=file] {
+  left: 0;
+  top: 0;
+  opacity: 0;
+  position: absolute;
+  font-size: 90px;
+}
+.btn-upload {
+  background-color: #fff;
+  border: 3px solid #000;
+  color: #000;
+  padding: 10px 25px;
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+</style>
+</head>
+
 <body>
+
 <form name="myForm" action="" method="post">
-  <input id="fileForUpload" type="file" accept="image/*;" capture="camera">
-  <input type="button" value="Send" onclick="submitForm()">
+  <div class="parent-div">
+    <button class="btn-upload">Prendre Photo</button>
+    <span id="fileName" style='font-size: small'></span>
+    <input id="fileForUpload" type="file" accept="image/*;" capture="camera" onchange="previewForm();">
+  </div>
+  <div>
+    <br/><br/> <br/><br/>
+    <input id="sizePhotoCheckbox" type="checkbox" onchange="setSizePhoto()">200x200<checkbox>
+    <br/><br/>
+    <input class="btn-upload" type="button" value="PreviewImg" title="Prévisualiser la photo" onclick="previewForm()">
+    <input class="btn-upload" type="button" value="Preview" title="Prévisualiser le contenu du fichier" onclick="previewContentForm()">
+    <input class="btn-upload" id='buttonSend' style='visibility: hidden' type="button" value="SEND" title="Envoyer le formulaire" onclick="submitForm()">
+  </div>
 </form>
-File : content : <span id="fileContents"></span>
+<br/>
+File content : <span id="fileContents"></span>
 
 
 <script>
+
+/*
+function toggle(checked) {
+  var elm = document.getElementById('checkbox');
+  if (checked != elm.checked) {
+    elm.click();
+  }
+}
+*/
+
 function submitForm(){
+  console.log('submit form');
+  document.myForm.submit();
+}
+
+function setSizePhoto(){
+  if (document.getElementById("sizePhotoCheckbox").checked == true) {
+    document.getElementById("base64image").style.width = "200px";
+    document.getElementById("base64image").style.height = "200px";
+  } else {
+    document.getElementById("base64image").style.width = "";
+    document.getElementById("base64image").style.height = "";
+  }
+  
+}
+
+function previewForm(){
+
+  document.getElementById('sizePhotoCheckbox').checked = false;
+
+  var file = document.getElementById("fileForUpload").files[0];
+   
+  document.getElementById("fileName").innerHTML = file.name;
+  if (file) {
+
+    document.getElementById("buttonSend").style.visibility = 'visible';
+
+    var reader = new FileReader();
+    // reader.readAsText(file, "UTF-8");
+    // encode base 64 file
+    reader.readAsDataURL( file );
+    reader.onload = function (evt) {
+        //  document.getElementById("fileContents").innerHTML = evt.target.result;
+        // Image  width:200px;height:200px
+        document.getElementById("fileContents").innerHTML = "<img style='display:block;color: red;border: solid 2px;' id='base64image' src='" + evt.target.result + "' />"
+    }
+    reader.onerror = function (evt) {
+        document.getElementById("fileContents").innerHTML = "error reading file";
+    }
+  }
+  console.log('preview form');
+}
+
+
+function previewContentForm(){
  
   var file = document.getElementById("fileForUpload").files[0];
   if (file) {
@@ -22,11 +118,10 @@ function submitForm(){
     }
   }
   
-  alert('submit form');
-  //document.myForm.submit();
- 
+  console.log('preview form');
 
 }
+
 
 </script>
 
