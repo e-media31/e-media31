@@ -1,5 +1,8 @@
 <html>
 <head>
+<meta name="viewport" content="width=devicewidth, initial-scale=1.0">
+
+
 <!-- FF 2021-12-09 -->
 <style>
 # https://waytolearnx.com/2019/07/changer-le-bouton-parcourir-dun-input-de-type-file-avec-css.html
@@ -70,8 +73,8 @@ function setSizePhoto(){
     document.getElementById("base64image").style.width = "200px";
     document.getElementById("base64image").style.height = "200px";
   } else {
-    document.getElementById("base64image").style.width = "";
-    document.getElementById("base64image").style.height = "";
+    document.getElementById("base64image").style.width = "100%";
+    document.getElementById("base64image").style.height = "auto";
   }
   
 }
@@ -94,7 +97,7 @@ function previewForm(){
     reader.onload = function (evt) {
         //  document.getElementById("fileContents").innerHTML = evt.target.result;
         // Image  width:200px;height:200px
-        document.getElementById("fileContents").innerHTML = "<img style='display:block;color: red;border: solid 2px;' id='base64image' src='" + evt.target.result + "' />"
+        document.getElementById("fileContents").innerHTML = "<img style='display:block;width:100%;height:auto;color: red;border: solid 2px;' id='base64image' src='" + evt.target.result + "' />"
     }
     reader.onerror = function (evt) {
         document.getElementById("fileContents").innerHTML = "error reading file";
