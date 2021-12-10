@@ -33,6 +33,10 @@
 
 <body>
 
+<!-- Un élément HTML pour recueillir l’affichage Geolocalisation-->
+<div id="infoposition"></div>
+
+
 <form name="myForm" action="" method="post">
   <div class="parent-div">
     <button class="btn-upload">Prendre Photo</button>
@@ -125,7 +129,34 @@ function previewContentForm(){
 
 }
 
+</script>
 
+<script>
+// https://www.alsacreations.com/tuto/lire/926-geolocalisation-geolocation-html5.html
+function maPosition(position) {
+  var infopos = "Position déterminée :\n";
+  infopos += "Latitude : "+position.coords.latitude +"\n";
+  infopos += "Longitude: "+position.coords.longitude+"\n";
+  infopos += "Altitude : "+position.coords.altitude +"\n";
+  document.getElementById("infoposition").innerHTML = infopos;
+}
+
+// Fonction de callback en cas de succès
+function surveillePosition(position) {
+    var infopos = "Position déterminée :\n";
+    infopos += "Latitude : "+position.coords.latitude +"\n";
+    infopos += "Longitude: "+position.coords.longitude+"\n";
+    infopos += "Altitude : "+position.coords.altitude +"\n";
+    infopos += "Vitesse  : "+position.coords.speed +"\n";
+    document.getElementById("infoposition").innerHTML = infopos;
+}
+
+if(navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(maPosition);
+  // var survId = navigator.geolocation.watchPosition(surveillePosition);
+  // Annule le suivi de la position si nécessaire.
+  //navigator.geolocation.clearWatch(survId);
+}
 </script>
 
 
