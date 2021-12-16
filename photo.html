@@ -5,9 +5,12 @@
 
 <!-- FF 2021-12-09 -->
 <style>
-main {
- max-width: 900px;
+body {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-width: 900px;
 }
+
 # https://waytolearnx.com/2019/07/changer-le-bouton-parcourir-dun-input-de-type-file-avec-css.html
 .parent-div {
   display: inline-block;
@@ -35,7 +38,7 @@ main {
 </head>
 
 <body>
-<main>
+
 <!-- Un élément HTML pour recueillir l’affichage Geolocalisation-->
 <div id="infoposition"></div>
 
@@ -162,6 +165,5 @@ if(navigator.geolocation) {
 }
 </script>
 
-</main>
 </body>
 </html>
