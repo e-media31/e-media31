@@ -1,10 +1,13 @@
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=1.0, minimum-scale=0.86">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0.86">
 
 
 <!-- FF 2021-12-09 -->
 <style>
+main {
+ max-width: 900px;
+}
 # https://waytolearnx.com/2019/07/changer-le-bouton-parcourir-dun-input-de-type-file-avec-css.html
 .parent-div {
   display: inline-block;
@@ -32,7 +35,7 @@
 </head>
 
 <body>
-
+<main>
 <!-- Un élément HTML pour recueillir l’affichage Geolocalisation-->
 <div id="infoposition"></div>
 
@@ -159,6 +162,6 @@ if(navigator.geolocation) {
 }
 </script>
 
-
+</main>
 </body>
 </html>
